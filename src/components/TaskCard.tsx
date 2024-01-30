@@ -25,6 +25,7 @@ export default function TaskCard({ task }: TaskCardProps) {
                     <Card.Title>{task.name}</Card.Title>
                     <Card.Text>{task.description}</Card.Text>
                 </Card.Body>
+                { task.dueDate && <Card.Footer><b>Due:</b> {task.dueDate.toString()}</Card.Footer>  }
             </Card>
         </Col>
     )
