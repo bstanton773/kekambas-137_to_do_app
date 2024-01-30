@@ -1,5 +1,6 @@
-import Container from 'react-bootstrap/Container'
+import Container from 'react-bootstrap/Container';
 import Navigation from './components/Navigation';
+import ToDo from './views/ToDo';
 
 
 export default function App() {
@@ -7,7 +8,7 @@ export default function App() {
         <>
             <Navigation />
             <Container>
-                <h1>Hello World</h1>
+                <ToDo />
             </Container>
         </>
     )
