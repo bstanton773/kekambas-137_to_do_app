@@ -5,10 +5,21 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
+type TaskFormObject = {
+    name:string,
+    description:string,
+    dueDate:string
+}
+
 type Props = {}
 
 export default function TaskForm({}: Props) {
     const [showForm, setShowForm] = useState(false);
+    const [newTask, setNewTask] = useState<TaskFormObject>({name:'', description:'', dueDate:''})
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setNewTask({...newTask, [event.target.name]: event.target.value})
+    }
 
     return (
         <>
@@ -27,11 +38,31 @@ export default function TaskForm({}: Props) {
                                 <Form>
                                     <Form.Group className='mb-3'>
                                         <Form.Label>Task Name</Form.Label>
-                                        <Form.Control type='text' name='name' placeholder='Enter Task Name' required />
+                                        <Form.Control 
+                                            type='text' 
+                                            name='name' 
+                                            placeholder='Enter Task Name' 
+                                            required
+                                            value={newTask.name} 
+                                            onChange={handleInputChange}
+                                        />
                                         <Form.Label>Task Description</Form.Label>
-                                        <Form.Control type='text' name='description' placeholder='Enter Task Description' required />
-                                        <Form.Label>Due Date</Form.Label>
-                                        <Form.Control type='text' name='description' placeholder='Enter Task Description' />
+                                        <Form.Control 
+                                            type='text' 
+                                            name='description' 
+                                            placeholder='Enter Task Description' 
+                                            required
+                                            value={newTask.description} 
+                                            onChange={handleInputChange}
+                                        />
+                                        <Form.Label>Due Date (Optional)</Form.Label>
+                                        <Form.Control 
+                                            type='text' 
+                                            name='dueDate' 
+                                            placeholder='Enter Task Due Date' 
+                                            value={newTask.dueDate} 
+                                            onChange={handleInputChange}
+                                        />
                                         <Form.Text className="text-muted">Please enter due date in the form of YYYY-MM-DD HH:MM:SS</Form.Text>
                                     </Form.Group>
                                     <Button variant='outline-success' className='w-100' type='submit'>Create Task</Button>
