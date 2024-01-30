@@ -23,10 +23,15 @@ export default function ToDo({}: Props) {
         setTasks([...tasks, newTask])
     }
 
+    const changeCompletedStatus = (taskID:number) => {
+        let updatedTasks = tasks.map( t => t.id === taskID ? {...t, completed: !t.completed} : t )
+        setTasks(updatedTasks)
+    }
+
     return (
         <>
             <TaskForm addNewTask={addNewTask} />
-            <TaskDisplay tasks={tasks} />
+            <TaskDisplay tasks={tasks} changeCompletedStatus={changeCompletedStatus} />
         </>
     )
 }

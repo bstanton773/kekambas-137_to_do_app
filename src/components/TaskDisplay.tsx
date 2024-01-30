@@ -6,10 +6,11 @@ import { Task } from '../types';
 
 
 type TaskDisplayProps = {
-    tasks: Task[]
+    tasks: Task[],
+    changeCompletedStatus: (taskID:number) => void
 }
 
-export default function TaskDisplay({ tasks }: TaskDisplayProps) {
+export default function TaskDisplay({ tasks, changeCompletedStatus }: TaskDisplayProps) {
     const completedTasks = tasks.filter( t => t.completed);
     const pendingTasks = tasks.filter(t => !t.completed);
     return (
@@ -18,13 +19,13 @@ export default function TaskDisplay({ tasks }: TaskDisplayProps) {
                 <Col xs={12}>
                     <h2 className='text-center'>Pending Tasks</h2>
                 </Col>
-                {pendingTasks.map( t => <TaskCard task={t} key={t.id} /> )}
+                {pendingTasks.map( t => <TaskCard task={t} key={t.id} changeCompletedStatus={changeCompletedStatus} /> )}
             </Row>
             <Row>
                 <Col xs={12}>
                     <h2 className='text-center'>Completed Tasks</h2>
                 </Col>
-                {completedTasks.map( t => <TaskCard task={t} key={t.id} /> )}
+                {completedTasks.map( t => <TaskCard task={t} key={t.id} changeCompletedStatus={changeCompletedStatus} /> )}
             </Row>
         </>
     )
