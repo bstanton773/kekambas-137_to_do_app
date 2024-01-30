@@ -28,10 +28,16 @@ export default function ToDo({}: Props) {
         setTasks(updatedTasks)
     }
 
+    const sortTasks = (field:keyof Task) => {
+        let copiedTasks = [...tasks]
+        copiedTasks.sort( (a:Task, b:Task) => a[field]! > b[field]! ? 1 : -1 )
+        setTasks(copiedTasks)
+    }
+
     return (
         <>
             <TaskForm addNewTask={addNewTask} />
-            <TaskDisplay tasks={tasks} changeCompletedStatus={changeCompletedStatus} />
+            <TaskDisplay tasks={tasks} changeCompletedStatus={changeCompletedStatus} sortTasks={sortTasks} />
         </>
     )
 }
