@@ -1,4 +1,5 @@
-import TaskDisplay from '../components/TaskDisplay'
+import TaskDisplay from '../components/TaskDisplay';
+import TaskForm from '../components/TaskForm';
 
 
 type Task = {
@@ -48,6 +49,7 @@ export default function ToDo({}: Props) {
     ]
     return (
         <>
+            <TaskForm />
             <TaskDisplay tasks={tasks} />
         </>
     )
