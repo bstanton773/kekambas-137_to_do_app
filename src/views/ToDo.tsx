@@ -1,55 +1,31 @@
+import { useState } from 'react';
 import TaskDisplay from '../components/TaskDisplay';
 import TaskForm from '../components/TaskForm';
+import { Task, TaskFormObject } from '../types';
 
-
-type Task = {
-    id: number,
-    name: string,
-    description: string,
-    dateCreated: Date,
-    completed: boolean,
-    dueDate?: Date
-}
 
 type Props = {}
 
 export default function ToDo({}: Props) {
-    const tasks: Task[] = [
-        {
-            id: 1,
-            name: 'Finish App',
-            dateCreated: new Date('2024-01-30T12:00:00Z'),
-            completed: false,
-            dueDate: new Date('2024-01-31T12:00:00Z'),
-            description: 'Complete the To Do App so that you can keep track of your tasks!',
-        },
-        {
-            id: 2,
-            name: 'Finish App',
-            dateCreated: new Date('2024-01-30T12:00:00Z'),
-            completed: false,
-            dueDate: new Date('2024-01-31T12:00:00Z'),
-            description: 'Complete the To Do App so that you can keep track of your tasks!',
-        },
-        {
-            id: 3,
-            name: 'Finish App',
-            dateCreated: new Date('2024-01-30T12:00:00Z'),
-            completed: true,
-            dueDate: new Date('2024-01-31T12:00:00Z'),
-            description: 'Complete the To Do App so that you can keep track of your tasks!',
-        },
-        {
-            id: 4,
-            name: 'Finish App',
-            dateCreated: new Date('2024-01-30T12:00:00Z'),
-            completed: false,
-            description: 'Complete the To Do App so that you can keep track of your tasks!',
-        },
-    ]
+    const [ tasks, setTasks ] = useState<Task[]>([]);
+
+    const addNewTask = (newTaskData: TaskFormObject) => {
+        let newTask:Task = {
+            id: tasks.length + 1,
+            name: newTaskData.name!,
+            description: newTaskData.description!,
+            dateCreated: new Date(),
+            completed: false
+        }
+        if (newTaskData.dueDate){
+            newTask.dueDate = new Date(newTaskData.dueDate)
+        }
+        setTasks([...tasks, newTask])
+    }
+
     return (
         <>
-            <TaskForm />
+            <TaskForm addNewTask={addNewTask} />
             <TaskDisplay tasks={tasks} />
         </>
     )

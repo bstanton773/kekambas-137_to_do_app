@@ -1,15 +1,8 @@
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
+import { Task } from '../types';
 
 
-type Task = {
-    id: number,
-    name: string,
-    description: string,
-    dateCreated: Date,
-    completed: boolean,
-    dueDate?: Date
-}
 
 type TaskCardProps = {
     task: Task
